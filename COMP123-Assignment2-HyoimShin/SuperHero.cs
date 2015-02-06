@@ -5,6 +5,7 @@
  * Revision History : 
  * - Crated constructor of SuperHero by using Hero Class
  * - Added generateRandomPowers method
+ * - Changed array name
  * ******************************************************/
 
 using System;
@@ -21,7 +22,7 @@ namespace COMP123_Assignment2_HyoimShin
 
         // PRIVATE PROPERTIES +++++++++++++++++++++++++++++++++++++++++
         private string[] superPowerLists = { "Super Speed", "Super Strength", "Body Armour", "Flight", "Fire Generation", "Weather Control" };
-        private bool[] checkDuplicateArr = new bool[6];    // is used to check whethere the value of superPowerList is already used or not(false->not use) 
+        private bool[] checkUsedRandomNum = new bool[6];    // is used to check whethere the value of superPowerList is already used or not(false->not use) 
         private string[] superPower = new string[3];
 
         private int randomNum;
@@ -53,7 +54,7 @@ namespace COMP123_Assignment2_HyoimShin
         // Generates three random superpowers
         private void generateRandomPowers()
         {
-            initialCheckArray(checkDuplicateArr);
+            initialCheckArray(checkUsedRandomNum);
 
             int count = 0;
             while (count < superPower.Length)
@@ -61,20 +62,20 @@ namespace COMP123_Assignment2_HyoimShin
                 randomNum = rnd.Next(6);
 
                 // If the random number is not used, input the value of random number in superPowerLists to superPower array
-                if (checkDuplicateArr[randomNum] == false)
+                if (checkUsedRandomNum[randomNum] == false)
                 {
                     this.superPower[count] = superPowerLists[randomNum];
-                    checkDuplicateArr[randomNum] = true;
+                    checkUsedRandomNum[randomNum] = true;
                 }
                 // If the random number is already used, it generates other random number
-                else if (checkDuplicateArr[randomNum] == true)
+                else if (checkUsedRandomNum[randomNum] == true)
                 {
-                    while (checkDuplicateArr[randomNum] != false)
+                    while (checkUsedRandomNum[randomNum] != false)
                     {
                         randomNum = rnd.Next(6);
                     }
                     this.superPower[count] = superPowerLists[randomNum];
-                    checkDuplicateArr[randomNum] = true;
+                    checkUsedRandomNum[randomNum] = true;
                 }
                 count++;
             }
@@ -86,7 +87,7 @@ namespace COMP123_Assignment2_HyoimShin
             int index = 0;
             while (index < checkValueArray.Length)
             {
-                this.checkDuplicateArr[index] = false;
+                this.checkUsedRandomNum[index] = false;
                 index++;
             }
         }
